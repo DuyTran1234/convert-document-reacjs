@@ -22,13 +22,6 @@ const convertFileApi = async (formData) => {
 }
 
 const downloadFileApi = (filenameConvert) => {
-    // try {
-    //     const result = await axios.get(serverApi + `/download/filename/${filenameConvert}`);
-    //     return result;
-    // }
-    // catch (err) {
-    //     console.log(err);
-    // }
     return serverApi + `/download/filename/${filenameConvert}`;
 }
 

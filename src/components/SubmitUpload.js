@@ -11,13 +11,16 @@ function SubmitUpload() {
     const toolContext = useContext(ToolsContext);
     const tool = toolContext.tool;
     const fileInput = toolContext.fileInput;
+    const resizeImage = toolContext.resizeImage;
 
     const handleSubmit = async () => {
         if (checkExtension(fileInput.name, tool.ext)) {
+            console.log({...tool, ...fileInput, ...resizeImage});
             setIsLoading(true);
             let formData = new FormData();
             formData.append('fileUpload', fileInput);
             formData.append('tool', tool.value);
+            formData.append('resizeImageJson', JSON.stringify(resizeImage));
             const result = await convertFileApi(formData);
             if (result) {
                 if (result.status === 200) {
