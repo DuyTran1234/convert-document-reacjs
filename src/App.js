@@ -18,6 +18,7 @@ function App() {
     { content: "PDF to PowerPoint", value: 5, ext: ['.pdf'] },
     { content: "JPG to PDF", value: 6, ext: ['.jpg', '.jpeg'] },
     { content: "SVG to PNG", value: 7, ext: ['.svg'] },
+    { content: "MP4 to MP3", value: 8, ext: ['.mp4'] },
   ];
   const [tool, setTool] = useState(listTool[0]);
   const [fileInput, setFileInput] = useState('');
