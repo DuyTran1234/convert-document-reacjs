@@ -13,7 +13,8 @@ import CompareArrows from '@material-ui/icons/CompareArrows';
 import GetApp from '@material-ui/icons/GetApp';
 import useStyleStep ,{useStepIconStyles} from './styleStep';
 import {defaultStep} from './defaultStep';
-import InputUpload from '../../components/InputUpload';
+import InputUpload from './InputUpload';
+import SelectConversion from './SelectConversion';
 
 function getStepContent(step) {
   switch (step) {
@@ -28,34 +29,47 @@ function getStepContent(step) {
   }
 }
 
-function StepComponent() {
+function StepComponent(props) {
+    const {
+        onChangeFile, optionsTool, fileInput,isActive,
+        conversionSelected, onSelectConversion
+    } = props
   const classes = useStyleStep();
-  const [activeStep, setActiveStep] = React.useState(1);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
 
   return (
     <div className={classes.containerSteps}>
-      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorStepConnector />}>
+      <Stepper alternativeLabel activeStep={isActive} connector={<ColorStepConnector />}>
         {defaultStep.map((item) => (
           <Step key={item?.label} className={classes?.stepItem}>
             <StepIcon>{StepIcon}</StepIcon>
             <div className={classes?.stepIcon}>
             {
-                item?.name =='upload' ? 
-                <InputUpload/>
-                :
-                null
+               item?.name && item?.name === 'upload' && 
+                <InputUpload
+                    onChangeFile={onChangeFile}
+                />
+            }
+            {
+                item?.name && item?.name ==='convert' && 
+                <SelectConversion
+                    isDisabled = {isActive<1}
+                    optionsTool={optionsTool}
+                    onSelectConversion={onSelectConversion}
+                    conversionSelected = {conversionSelected}
+                />
+            }
+            {
+                item?.name && item?.name ==='download' && 
+                <Button 
+                  disabled={isActive < 1 || (isActive === 1 && !conversionSelected?.value)}
+                  className={clsx(
+                      classes?.btnDownload, 
+                      {
+                  [classes.btnDisable]: isActive < 1 || (isActive === 1 && !conversionSelected?.value && conversionSelected?.value!==0),
+                })}
+                >
+                    <p className={classes.txtDownload}>Download</p>
+                </Button>
             }
             </div>
             </Step>

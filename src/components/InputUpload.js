@@ -3,15 +3,11 @@ import ToolsContext from "../context/ToolsContext";
 import {colors} from '../constants';
 
 function InputUpload(props) {
+    const {onChangeFile} = props;
+    
     const toolContext = React.useContext(ToolsContext);
-    const setFileInput = toolContext.setFileInput;
     const tool = toolContext.tool;
     const inputRef = useRef();
-
-    const handleChangeFile = (e) => {
-        console.log(e.target.files[0]);
-        setFileInput(e.target.files[0]);
-    }
 
     const onPressUpload =()=>{
         inputRef.current.click()
@@ -24,7 +20,7 @@ function InputUpload(props) {
             <input type="file" 
                 ref={inputRef}
                 style={styles?.inputFile}
-                onChange={handleChangeFile} accept={tool.ext} />
+                onChange={(e)=>onChangeFile(e.target.files[0])} accept={tool.ext} />
         </React.Fragment>
     );
 }

@@ -4,13 +4,7 @@ import {gif, images} from '../../assets';
 
 export default makeStyles({
     container:{
-        display:'flex',
-        flexDirection:'column',
-        width:'100vw',
-        backgroundColor:colors?.white
-    },
-    divTop:{
-        width:'100vw',height:'37vw',
+        width:'100vw',height:'100vh',
         backgroundImage:`url(${images?.background})`,
         backgroundPosition:'center',
         backgroundRepeat:'none',
@@ -108,5 +102,15 @@ export default makeStyles({
         color:colors?.white,
         padding:0,margin:0,
     },
-    
+    selectContainer:{
+        height:50,
+        borderWidth:1, borderColor:colors?.blue,
+        borderRadius:8,borderStyle:'solid'
+    },
+    divProgressBar:{
+        width: '70%',
+        borderRadius:12,
+        marginTop:40,
+        backgroundColor: colors?.transparent,
+    }
 })
