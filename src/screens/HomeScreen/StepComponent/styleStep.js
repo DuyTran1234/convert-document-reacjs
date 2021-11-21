@@ -1,5 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
-import {colors } from '../../constants';
+import {colors } from '../../../constants';
 
 export default makeStyles({
     root: {
@@ -26,10 +26,11 @@ export default makeStyles({
         width: '70%',
         minHeight:100,
         borderRadius:12,
+        marginTop:20,
         "& .MuiPaper-root":{
             backgroundColor: colors?.transparent,
             borderRadius:10,
-            
+
         }
     },
     stepItem:{
@@ -40,6 +41,18 @@ export default makeStyles({
     },
     stepIcon:{
         paddingTop:20,
+    },
+    btnDownload:{
+       width:135,height:40,
+       borderRadius:8,
+       backgroundColor:colors?.blue, 
+    },
+    txtDownload:{
+        fontSize:14,fontWeight:'bold',
+        color:colors?.white
+    },
+    btnDisable:{
+        backgroundColor:'gray'
     }
   });
 
@@ -64,4 +77,5 @@ export default makeStyles({
       zIndex: 1,
       fontSize: 18,
     },
+
   });
