@@ -2,12 +2,6 @@ import './App.css';
 import { useState } from 'react';
 import { Grid } from '@mui/material';
 import ToolsContext from './context/ToolsContext';
-import ListTool from './components/ListTool';
-import InputUpload from './components/InputUpload';
-import SubmitUpload from './components/SubmitUpload';
-import ResizeImage from './components/ResizeImage';
-import Navbar from './components/Navbar';
-import StepComponent from './components/StepComponent';
 import HomeScreen from './screens/HomeScreen';
 
 function App() {
@@ -41,22 +35,8 @@ function App() {
   return (
     <div className="App">
       <ToolsContext.Provider value={toolContextValue} >
-        {/* <Navbar /> */}
         <Grid container spacing={2}>
-          <HomeScreen/>
-          {/* <Grid item xs={6} md={4}>
-            <StepComponent/>
-            <br />
-            <ListTool listTool={listTool} />
-            <br />
-            <InputUpload />
-            <br />
-            <ResizeImage />
-            <br />
-            <SubmitUpload />
-          </Grid>
-          <Grid item xs={6} md={8}> */}
-          {/* </Grid> */}
+          <HomeScreen />
         </Grid>
       </ToolsContext.Provider>
     </div>
