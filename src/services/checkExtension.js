@@ -24,6 +24,7 @@ const listTool = [
     { label: "PDF to PowerPoint", value: 5, ext: ['.pdf'] },
     { label: "JPG to PDF", value: 6, ext: ['.jpg', '.jpeg'] },
     { label: "SVG to PNG", value: 7, ext: ['.svg'] },
+    { label: "MP4 to MP3", value: 8, ext: ['.mp4'] },
   ];
 
 const renderOptionsTool = (nameFile)=>{
@@ -48,7 +49,8 @@ const renderOptionsTool = (nameFile)=>{
 
             case typeFile === '.svg':
                 return [listTool[7]]
-
+            case typeFile === '.mp4' :
+                return [listTool[8]]
             default:
                 return [];
         }
