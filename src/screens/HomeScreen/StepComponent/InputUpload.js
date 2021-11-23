@@ -1,26 +1,29 @@
-import React, {useRef} from "react";
-import {colors} from '../../../constants';
-import {Button } from '@material-ui/core';
+import React, { useRef } from "react";
+import { colors } from '../../../constants';
+import { Button } from '@material-ui/core';
 
 function InputUpload(props) {
-    const {onChangeFile} = props;
+    const { onChangeFile, isDisabled, conversionSelected} = props;
     const inputRef = useRef();
 
-    const onPressUpload =()=>{
+    const onPressUpload = () => {
         inputRef.current.click()
     }
     return (
         <React.Fragment >
-            <Button 
-                onClick={()=>onPressUpload()}
-                style={styles?.btnUpload}
+            <Button
+                disabled={isDisabled}
+                onClick={() => onPressUpload()}
+                style={isDisabled ? styles?.btnDisable : styles?.btnUpload}
+
             >
                 <p style={styles?.txtUpload}>Upload file</p>
             </Button>
-            <input type="file" 
+            <input type="file"
                 ref={inputRef}
                 style={styles?.inputFile}
-                onChange={(e)=>onChangeFile(e.target.files[0])}/>
+                accept={conversionSelected?.ext}
+                onChange={(e) => onChangeFile(e.target.files[0])} />
         </React.Fragment>
     );
 }
@@ -28,16 +31,21 @@ function InputUpload(props) {
 export default InputUpload;
 
 const styles = {
-    inputFile:{
-        display:'none'
+    inputFile: {
+        display: 'none'
     },
-    btnUpload:{
-        width:140,height:40,
-       borderRadius:8,
-       backgroundColor:colors?.blue, 
+    btnUpload: {
+        width: 140, height: 40,
+        borderRadius: 8,
+        backgroundColor: colors?.blue,
     },
-    txtUpload:{
-        fontSize:14,fontWeight:'bold',
-        color:colors?.white
-    }
+    txtUpload: {
+        fontSize: 14, fontWeight: 'bold',
+        color: colors?.white
+    },
+    btnDisable: {
+        width: 140, height: 40,
+        borderRadius: 8,
+        backgroundColor: 'gray'
+    },
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { icons, images } from '../../assets';
 import useStyles from './styles';
 import HeaderComponent from './HeaderComponent';
@@ -11,15 +11,17 @@ import { createFormData } from "../../services/createFormData";
 const initialSelected = { label: 'Select file conversion', value: '' }
 
 function HomeScreen(props) {
+    const listOptions = renderOptionsTool();
     const classes = useStyles();
     const [fileInput, setFileInput] = useState(null);
     const [conversionSelected, setConversionSelected] = useState(initialSelected);
-    const [optionsTool, setOptionsTool] = useState([]);
+    const [optionsTool, setOptionsTool] = useState(listOptions);
     const [isActive, setIsActive] = useState(0);
     const [valueLoading, setValueLoading] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [convertDone, setConvertDone] = useState({});
     const [linkDownload, setLinkDownload] = useState("");
+    const [fileNameConverted, setFileNameConverted] = useState("");
 
     // loading process convert
     useEffect(() => {
@@ -33,45 +35,43 @@ function HomeScreen(props) {
         }
     }, [isLoading]);
 
-    const onChangeFile = (file) => {
-        setConvertDone({isSuccess: false, message: ''});
-        setIsLoading(false);
-        setFileInput(file);
-        setIsActive(1);
-        setConversionSelected(initialSelected);
-        handleOptionByTypeFile(file?.name);
-    };
+    useEffect(() => {
+        if (!conversionSelected) {
+            setIsActive(0);
+        }
+    }, [conversionSelected, isActive]);
 
-    const onSelectConversion = async (value) => {
-        setConvertDone({isSuccess: false, message: ''});
+    const onChangeFile = async (file) => {
+        setFileNameConverted('');
+        setConvertDone({ isSuccess: false, message: '' });
+        setFileInput(file);
+        setValueLoading(0);
         setIsActive(1);
-        setConversionSelected(value);
-        console.log(value);
-        console.log(fileInput);
-        if (value) {
+        if (file) {
             setIsLoading(true);
-            const formData = createFormData(fileInput, value?.value);
+            const formData = createFormData(file, conversionSelected?.value);
             try {
                 const convertFileResult = await convertFileApi(formData);
                 if (convertFileResult.status === 200) {
                     setIsLoading(false);
                     setIsActive(2);
-                    setValueLoading(0);
                     setConvertDone({
                         isSuccess: true,
-                        messsage: 'Convert file success',
+                        messsage: 'Convert file success!',
                     });
                     setLinkDownload(downloadFileApi(convertFileResult.data));
+                    setFileNameConverted(convertFileResult.data);
+                    setFileInput(null);
                 }
-                else {
-                    setValueLoading(50);
-                    setConvertDone({
-                        isSuccess: false,
-                        messsage: 'Convert error, please try again',
-                    });
-                }
+                // else {
+                //     setConvertDone({
+                //         isSuccess: false,
+                //         messsage: 'Convert error, please try again',
+                //     });
+                // }
             }
             catch (error) {
+                setFileInput(null);
                 setIsLoading(false);
                 console.log(error);
                 setConvertDone({
@@ -82,11 +82,11 @@ function HomeScreen(props) {
         }
     };
 
-    const handleOptionByTypeFile = (nameFile) => {
-        if (nameFile) {
-            const listOptions = renderOptionsTool(nameFile)
-            setOptionsTool(listOptions)
-        }
+    const onSelectConversion = async (value) => {
+        setFileNameConverted('');
+        setConvertDone({ isSuccess: false, message: '' });
+        setIsActive(1);
+        setConversionSelected(value);
     };
 
     return (
@@ -108,7 +108,11 @@ function HomeScreen(props) {
                 linkDownload={linkDownload}
             />
             <div className={classes?.divProgressBar}>
-                <ResultComponent isLoading={isLoading} convertDone={convertDone} valueLoading={valueLoading} />
+                <ResultComponent
+                    fileNameConverted={fileNameConverted}
+                    isLoading={isLoading}
+                    convertDone={convertDone}
+                    valueLoading={valueLoading} />
             </div>
         </div>
     )

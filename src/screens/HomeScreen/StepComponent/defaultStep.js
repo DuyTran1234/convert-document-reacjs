@@ -1,11 +1,11 @@
 const defaultStep =[
     {
-        name:'upload',
-        label:"Blo",
-    },
-    {
         name:'convert',
         label:"Alo",
+    },
+    {
+        name:'upload',
+        label:"Blo",
     },
     {
         name:'download',

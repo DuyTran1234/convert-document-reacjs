@@ -33,17 +33,19 @@ function StepComponent(props) {
             <StepIcon>{StepIcon}</StepIcon>
             <div className={classes?.stepIcon}>
               {
-                item?.name && item?.name === 'upload' &&
-                <InputUpload
-                  onChangeFile={onChangeFile}
+                item?.name && item?.name === 'convert' &&
+                <SelectConversion
+                  // isDisabled={isActive < 1}
+                  optionsTool={optionsTool}
+                  onSelectConversion={onSelectConversion}
+                  conversionSelected={conversionSelected}
                 />
               }
               {
-                item?.name && item?.name === 'convert' &&
-                <SelectConversion
+                item?.name && item?.name === 'upload' &&
+                <InputUpload
                   isDisabled={isActive < 1}
-                  optionsTool={optionsTool}
-                  onSelectConversion={onSelectConversion}
+                  onChangeFile={onChangeFile}
                   conversionSelected={conversionSelected}
                 />
               }
@@ -108,8 +110,8 @@ function StepIcon(props) {
   const { active, completed } = props;
 
   const icons = {
-    1: <Backup />,
-    2: <CompareArrows />,
+    1: <CompareArrows />,
+    2: <Backup />,
     3: <GetApp />,
   };
 

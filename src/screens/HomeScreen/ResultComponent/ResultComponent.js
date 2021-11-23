@@ -13,7 +13,7 @@ function ResultComponent(props) {
   const {
     isLoading,
     valueLoading,
-    convertDone
+    convertDone, fileNameConverted
   } = props
 
   const classes = useStyles()
@@ -27,6 +27,13 @@ function ResultComponent(props) {
         <div className={classes?.divProgressBar}>
           {isLoading ? <ProgressBar value={valueLoading} /> : "" }
           {convertDone?.isSuccess ? <p className={classes?.txtBlue}>{convertDone.messsage}</p> : <p className={classes?.txtBlue}>{convertDone.messsage}</p>}
+          {
+            fileNameConverted && fileNameConverted !== "" ? 
+            <div><p className={classes?.txtTitle}>File Name Converted: </p>
+            <p className={classes?.txtBlue}>{fileNameConverted}</p></div>
+            :
+            ""
+          }
         </div>
       </div>
       {/* <div className={classes?.divFile}>
