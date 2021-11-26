@@ -1,10 +1,11 @@
 import React from "react";
 import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
 import AppRegistrationSharpIcon from '@mui/icons-material/AppRegistrationSharp';
+import { defaultColor } from "../../services/pickColor";
 
-export default function Navbar() {
+function Navbar() {
     return (
-        <AppBar style={{ background: '#ccccb3' }} position="static">
+        <AppBar style={{ background: defaultColor }} position="static">
             <Toolbar>
                 <Typography variant="h6">
                     <IconButton
@@ -19,3 +20,4 @@ export default function Navbar() {
         </AppBar>
     );
 }
+export default Navbar;

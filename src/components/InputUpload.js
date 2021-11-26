@@ -1,44 +1,86 @@
-import React, {useRef} from "react";
-import ToolsContext from "../context/ToolsContext";
-import {colors} from '../constants';
+import * as React from 'react';
+import ChooseFileButton from './ChooseFileButton';
+import ToolsContext from '../context/ToolsContext';
+import InputUploadContainer from './InputUploadContainer';
+import { boxBorderColor, confirmConvertColor, defaultColor } from '../services/pickColor';
+import FileChosen from './FileChosen';
+import ConfirmConvertButton from './ConfirmConvertButton';
+import BackButton from './BackButton';
+import LoadingAnimation from './LoadingAnimation';
+import DonwloadButton from './DownloadButton';
+import PickIconFileInput from './PickIconFileInput';
 
-function InputUpload(props) {
-    const {onChangeFile} = props;
-    
-    const toolContext = React.useContext(ToolsContext);
-    const tool = toolContext.tool;
-    const inputRef = useRef();
+export default function InputUpload() {
+    const context = React.useContext(ToolsContext);
+    const tool = context.tool;
+    const fileInput = context.fileInput;
+    const isLoading = context.isLoading;
+    const confirmDonwload = context.confirmDonwload;
+    const linkDownload = context.linkDownload;
 
-    const onPressUpload =()=>{
-        inputRef.current.click()
-    }
+    const [inputContainer, setInputContainer] = React.useState(() => {
+        return (
+            <InputUploadContainer
+                backgroundColor={!tool ? defaultColor : tool.color}
+                listItem={[<ChooseFileButton />]}
+            />
+        );
+    });
+
+    React.useEffect(() => {
+        if (fileInput && isLoading && !confirmDonwload) {
+            const render = <InputUploadContainer
+                backgroundColor={confirmConvertColor}
+                boxBorder={3}
+                boxBorderColor={boxBorderColor}
+                listItem={[
+                    <h2>Converting ...</h2>,
+                    <LoadingAnimation />,
+                ]}
+            />
+            setInputContainer(render);
+        }
+        else if (fileInput && !isLoading && !confirmDonwload) {
+            const render = <InputUploadContainer
+                backgroundColor={confirmConvertColor}
+                boxBorder={3}
+                boxBorderColor={boxBorderColor}
+                listItem={[
+                    <h2>File chosen:</h2>,
+                    <FileChosen filename={fileInput.name} />,
+                    <ConfirmConvertButton />, <BackButton />
+                ]}
+            />
+            setInputContainer(render);
+        }
+        else if (confirmDonwload) {
+            const render = <InputUploadContainer
+                backgroundColor={confirmConvertColor}
+                boxBorder={3}
+                boxBorderColor={boxBorderColor}
+                listItem={[
+                    <h2>{linkDownload?.content}</h2>,
+                    <DonwloadButton linkDownload={linkDownload?.link} />,
+                    <BackButton />
+                ]}
+            />
+            setInputContainer(render);
+        }
+        else {
+            const render = <InputUploadContainer
+                backgroundColor={!tool ? defaultColor : tool.color}
+                listItem={[
+                    <PickIconFileInput valueTool={tool ? tool.value : -1} />,
+                    <ChooseFileButton />
+                ]}
+            />
+            setInputContainer(render);
+        }
+    }, [tool, fileInput, isLoading, confirmDonwload, linkDownload]);
+
     return (
-        <React.Fragment >
-            <button 
-            onClick={()=>onPressUpload()}
-            style={styles?.btnUpload}>Upload File</button>
-            <input type="file" 
-                ref={inputRef}
-                style={styles?.inputFile}
-                onChange={(e)=>onChangeFile(e.target.files[0])} accept={tool.ext} />
-        </React.Fragment>
+        <div>
+            {inputContainer}
+        </div>
     );
-}
-
-export default InputUpload;
-
-const styles = {
-    inputFile:{
-        display:'none'
-    },
-    btnUpload:{
-        width:100,
-        height:40,
-        display:'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor:colors?.blue,
-        borderRadius:6,
-        color:colors?.white,
-    }
 }
