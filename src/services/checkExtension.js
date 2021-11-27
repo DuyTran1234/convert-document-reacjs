@@ -1,6 +1,5 @@
-import { typeDocs, typeExcel, typePdf, typePowerPoint } from '../constants/typeDocument';
+import { excelColor, jpgColor, mp4Color, pdfColor, powerpointColor, svgColor, wordColor } from './pickColor';
 const path = require('path');
-
 const checkExtension = (fileName, extensions) => {
     if (!fileName) {
         return false;
@@ -16,15 +15,15 @@ const checkExtension = (fileName, extensions) => {
 }
 const renderOptionsTool = () => {
     let listTool = [
-        { label: "Word to PDF", value: 0, ext: ['.docx', '.doc', '.docm', '.dot', '.dotx', '.dotm', '.rtf'] },
-        { label: "Excel to PDF", value: 1, ext: ['.xlsx', '.xls', '.xlsm', '.xlsb', '.xlt', '.xlam'] },
-        { label: "PowerPoint to PDF", value: 2, ext: ['.ppt', '.pptx', '.pps', '.ppsx', '.pot'] },
-        { label: "PDF to Word", value: 3, ext: ['.pdf'] },
-        { label: "PDF to Excel", value: 4, ext: ['.pdf'] },
-        { label: "PDF to PowerPoint", value: 5, ext: ['.pdf'] },
-        { label: "JPG to PDF", value: 6, ext: ['.jpg', '.jpeg'] },
-        { label: "SVG to PNG", value: 7, ext: ['.svg'] },
-        { label: "MP4 to MP3", value: 8, ext: ['.mp4'] },
+        { label: "Word to PDF", value: 0, ext: ['.docx', '.doc', '.docm', '.dot', '.dotx', '.dotm', '.rtf'], color: wordColor },
+        { label: "Excel to PDF", value: 1, ext: ['.xlsx', '.xls', '.xlsm', '.xlsb', '.xlt', '.xlam'], color: excelColor },
+        { label: "PowerPoint to PDF", value: 2, ext: ['.ppt', '.pptx', '.pps', '.ppsx', '.pot'], color: powerpointColor },
+        { label: "PDF to Word", value: 3, ext: ['.pdf'], color: pdfColor },
+        { label: "PDF to Excel", value: 4, ext: ['.pdf'], color: pdfColor },
+        { label: "PDF to PowerPoint", value: 5, ext: ['.pdf'], color: pdfColor },
+        { label: "JPG to PDF", value: 6, ext: ['.jpg', '.jpeg'], color: jpgColor },
+        { label: "SVG to PNG", value: 7, ext: ['.svg'], color: svgColor  },
+        { label: "MP4 to MP3", value: 8, ext: ['.mp4'], color: mp4Color },
     ];
     // if(nameFile){
     //     const indexDot = nameFile.lastIndexOf('.');
