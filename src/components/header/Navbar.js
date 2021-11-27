@@ -5,7 +5,7 @@ import { defaultColor } from "../../services/pickColor";
 
 function Navbar() {
     return (
-        <AppBar style={{ background: defaultColor }} position="static">
+        <AppBar style={{ background: defaultColor }} position="fixed">
             <Toolbar>
                 <Typography variant="h6">
                     <IconButton

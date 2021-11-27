@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ToolsContext from './context/ToolsContext';
 import Navbar from './components/header/Navbar';
 import MainScreen from './components/body/MainScreen';
+import Footer from './components/footer/Footer';
 
 function App() {
   const [tool, setTool] = useState(null);
@@ -32,6 +33,7 @@ function App() {
       <ToolsContext.Provider value={toolContextValue} >
         <Navbar />
         <MainScreen />
+        <Footer />
         {/* </Box> */}
       </ToolsContext.Provider>
     </div>
