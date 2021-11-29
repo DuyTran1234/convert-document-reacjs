@@ -1,14 +1,14 @@
 import * as React from 'react';
 import ChooseFileButton from './ChooseFileButton';
-import ToolsContext from '../context/ToolsContext';
+import ToolsContext from '../../context/ToolsContext';
 import InputUploadContainer from './InputUploadContainer';
-import { boxBorderColor, confirmConvertColor, defaultColor } from '../services/pickColor';
+import { boxBorderColor, confirmConvertColor, defaultColor } from '../../services/pickColor';
 import FileChosen from './FileChosen';
 import ConfirmConvertButton from './ConfirmConvertButton';
 import BackButton from './BackButton';
-import LoadingAnimation from './LoadingAnimation';
+import LoadingAnimation from '../LoadingAnimation';
 import DonwloadButton from './DownloadButton';
-import PickIconFileInput from './PickIconFileInput';
+import PickIconFileInput from '../PickIconFileInput';
 
 export default function InputUpload() {
     const context = React.useContext(ToolsContext);

@@ -1,8 +1,9 @@
 import { Grid } from "@mui/material";
-import InputUpload from "../InputUpload";
-import IntroduceComponent from "../IntroduceComponent";
-import SelectConversion from "../SelectConversion";
+import InputUpload from "./InputUpload";
+import IntroduceComponent from "./IntroduceComponent";
+import SelectConversion from "./SelectConversion";
 import getIntroduces from "../../services/introduces";
+import IntroduceConvertFile from "./IntroduceConvertFile";
 
 const introduces = getIntroduces();
 function MainScreen() {
@@ -23,6 +24,10 @@ function MainScreen() {
                     </Grid>
                 })
             }
+            {/* <Grid xs={12} md={12}>
+                <IntroduceConvertFile />
+            </Grid> */}
+            <IntroduceConvertFile />
         </Grid>
     );
 }
