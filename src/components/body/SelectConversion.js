@@ -2,8 +2,8 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
-import { renderOptionsTool } from '../services/checkExtension';
-import ToolsContext from '../context/ToolsContext';
+import { renderOptionsTool } from '../../services/checkExtension';
+import ToolsContext from '../../context/ToolsContext';
 
 const listTool = renderOptionsTool();
 

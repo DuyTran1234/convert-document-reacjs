@@ -2,8 +2,8 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import { styled } from '@material-ui/styles';
-import ToolsContext from '../context/ToolsContext';
-import { checkExtension } from '../services/checkExtension';
+import ToolsContext from '../../context/ToolsContext';
+import { checkExtension } from '../../services/checkExtension';
 
 const Input = styled('input')({
     display: 'none',

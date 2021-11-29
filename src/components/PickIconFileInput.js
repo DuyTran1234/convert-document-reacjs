@@ -9,12 +9,12 @@ function PickIconFileInput(props) {
     const { valueTool } = props;
     if (valueTool === 0) {
         return <div style={styleIcon}>
-            <Icon icon="vscode-icons:file-type-word2" color="#d9d9d9" width="14vw" height="14vh" />;
+            <Icon icon="vscode-icons:file-type-word2" color="#d9d9d9" width="14vw" height="14vh" />
         </div>
     }
     else if (valueTool === 1) {
         return <div style={styleIcon}>
-            <Icon icon="vscode-icons:file-type-excel2" color="#d9d9d9" width="14vw" height="14vh" />;
+            <Icon icon="vscode-icons:file-type-excel2" color="#d9d9d9" width="14vw" height="14vh" />
         </div>
     }
     else if (valueTool === 2) {

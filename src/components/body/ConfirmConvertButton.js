@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import { useContext } from "react";
-import ToolsContext from "../context/ToolsContext";
-import { createFormData } from "../services/createFormData";
-import { convertFileApi, downloadFileApi } from "../api";
+import ToolsContext from "../../context/ToolsContext";
+import { createFormData } from "../../services/createFormData";
+import { convertFileApi, downloadFileApi } from "../../api";
 const styles = {
     width: "100%",
     height: "8vh",

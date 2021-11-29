@@ -34,7 +34,6 @@ function App() {
         <Navbar />
         <MainScreen />
         <Footer />
-        {/* </Box> */}
       </ToolsContext.Provider>
     </div>
   );
